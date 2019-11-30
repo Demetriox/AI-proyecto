@@ -1,45 +1,73 @@
 let mobilenet;
-let anotImagen;
+let predictor;
+let video;
+let value = 0;
+let slider;
+let addButton;
+let trainButton;
 
+function modelReady() {
+  console.log('Model is ready!!!');
+}
 
-function modelReady(){
-	console.log("Model is Ready !!!");
-	mobilenet.predict(puffin, gotResults);
+function videoReady() {
+  console.log('Video is ready!!!');
+}
+
+function whileTraining(loss) {
+  if (loss == null) {
+    console.log('Training Complete');
+    predictor.predict(gotResults);
+  } else {
+    console.log(loss);
+  }
 }
 
 
-function gotResults(error, results){
-	if(error){
-		console.error(error);
-	} else {
-		console.log(results);
-		let label = results[0].label;
-		let prob = results[0].confidence;
-		fill(0);
-		textSize(64);
-		text(label, 10, height-50 );
-		createP(label);
-		createP(prob);
-	}
+function gotResults(error, result) {
+  if (error) {
+    console.error(error);
+  } else {
+    value = result;
+    predictor.predict(gotResults);
+  }
 }
-
- function imageReady(){
-	image( puffin, 0,0, width, height);
- }
-
 
 function setup() {
-	createCanvas(650, 500);
-	puffin = createImg('images/kingping.jpeg', imageReady);
-	puffin.hide();	
-	mobilenet = ml5.imageClassifier('MobileNet',modelReady);
+  createCanvas(320, 270);
+  video = createCapture(VIDEO);
+  video.hide();
+  background(0);
+  mobilenet = ml5.featureExtractor('MobileNet', modelReady);
+  predictor = mobilenet.regression(video, videoReady);
+
+  slider = createSlider(0, 1, 0.5, 0.01);
+
+  addButton = createButton('add example image');
+  addButton.mousePressed(function() {
+    predictor.addImage(slider.value());
+  });
+
+  trainButton = createButton('train');
+  trainButton.mousePressed(function() {
+    predictor.train(whileTraining);
+  });
+
+  saveButton = createButton('save');
+  saveButton.mousePressed(function () {
+    predictor.save();
+  });
 
 }
 
-
-
-
-
-
-
- console.log('ml5 version:', ml5.version);
+function draw() {
+  background(0);
+  image(video, 0, 0, 320, 240);
+  rectMode(CENTER);
+  fill(255, 0, 200);
+  console.log(value);
+  rect(value.value * width, height / 2, 50, 50);
+  fill(255);
+  textSize(16);
+  text(value.value , 10, height - 10);
+}
