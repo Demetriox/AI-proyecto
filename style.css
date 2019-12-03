@@ -1,18 +1,76 @@
-* {
-    background-color: chocolate;
-    font-size: 1.2rem;
-}
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 
-body {
+body{
+    font-family: 'Roboto', sans-serif;
+}
+* {
     margin: 0;
     padding: 0;
+}
+
+#jutsusTable {
+    width: 60px;
     overflow: hidden;
 }
 
-#poses {
-    float: right;
+img{
+    width: 250px;
 }
 
-#header {
+#jutusTable{
     float: right;
+    margin-right: 30vw;
+    background-color: #ca6c01;
+    height: 350px;
+    width: 300px;
+    text-align: center;
+    padding-top: 60px;
+    color: white;
+    font-size: 20px;
 }
+
+
+i {
+    margin-right: 10px;
+}/* ---------horizontal-navbar-menu-----------*/
+#navbar-animmenu {
+    background: #000000;
+    float: left;
+    overflow: hidden;
+    position: relative;
+    padding: 10px 0px;
+  width: 100%;
+}
+#navbar-animmenu ul{
+    padding: 0px;
+    margin: 0px;
+  
+}
+
+#navbar-animmenu ul li a i{
+    margin-right: 10px;
+}
+
+#navbar-animmenu li {
+    list-style-type: none;
+    float: left;
+}
+
+#navbar-animmenu ul li a{
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    font-size: 15px;
+    line-height: 45px;
+    display: block;
+    padding: 0px 20px;
+    transition-duration:0.6s;
+    transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    position: relative;
+}
+
+#navbar-animmenu>ul>li.active>a{
+    color: #ca6c01;
+    background-color: transparent;
+    transition: all 0.7s;
+}
+
