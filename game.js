@@ -11,20 +11,20 @@ let flippedVideo;
 let label = "";
 var reloj = 40;
 var posiciones = [
-  { key: "0", value: "../images/pajaro.JPG" },
-  { key: "0", value: "../images/jabali.JPG" },
+  { key: "pajaro", value: "../images/pajaro.JPG" },
+  { key: "jabali", value: "../images/jabali.JPG" },
   { key: "perro", value: "../images/perro.JPG" },
   { key: "dragon", value: "../images/dragon.JPG" },
 
-  { key: "0", value: "../images/liebre.JPG" },
+  { key: "liebre", value: "../images/liebre.JPG" }, 
   { key: "caballo", value: "../images/caballo.JPG" },
-  { key: "mono", value: "../images/mono.JPG" },
+ { key: "mono", value: "../images/mono.JPG" },
   { key: "buey", value: "../images/buey.JPG" },
 
   { key: "rata", value: "../images/rata.JPG" },
   { key: "serpiente", value: "../images/serpiente.JPG" },
   { key: "tigre", value: "../images/tigre.JPG" },
-  { key: "carnero", value: "../images/carnero.JPG" },
+  { key: "carnero", value: "../images/carnero.JPG" }, 
 ];
 var i = posiciones.length;
 
@@ -46,6 +46,7 @@ function setup() {
   posiciones.sort(function () { return 0.5 - Math.random() });
   var img = document.createElement("img");
   img.src = posiciones[i - 1].value;
+  src.innerHTML = "";
   src.appendChild(img);
 }
 
@@ -56,6 +57,7 @@ function draw() {
   textSize(16);
   textAlign(CENTER);
   text(label, width / 2, height - 4);
+  jugar();
 }
 
 
@@ -88,6 +90,7 @@ function gotResult(error, results) {
 
 //LOGICA JUEGO
 function jugar() {
+  console.log(label)
   if (reloj+1 == 0) {
       var img = document.createElement("img");
       img.src = "../images/perdiste.jpg";
@@ -102,10 +105,10 @@ function jugar() {
       gameStart = false;
   }
   if (posiciones.length > 0) {
-      if (label[0].label == posiciones[i - 1].key) {
+      if (label == posiciones[i - 1].key) {
           src.innerHTML = "";
           var img = document.createElement("img");
-          img.src = posiciones[i - 1].value;
+          img.src = posiciones[i - 2].value;
           src.appendChild(img);
           posiciones.pop();
           i--;
@@ -125,7 +128,7 @@ function jugar() {
 function start() {
   updateClock();
   gameStart = true;
-  classifier.classify(gotResults);
+  classifier.classify(gotResult);
 }
 
 
