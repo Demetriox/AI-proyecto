@@ -2,6 +2,8 @@
 
 body{
     font-family: 'Roboto', sans-serif;
+    background: url('https://wallpapercave.com/wp/wp2552767.jpg');
+    background-size:cover;
 }
 * {
     margin: 0;
@@ -18,13 +20,11 @@ img{
 }
 
 #jutusTable{
-    float: right;
     margin-right: 30vw;
     background-color: #ca6c01;
     height: 350px;
     width: 300px;
     text-align: center;
-    padding-top: 60px;
     color: white;
     font-size: 20px;
 }
@@ -74,3 +74,15 @@ i {
     transition: all 0.7s;
 }
 
+
+.game-button {
+    font-size: 10px;
+    appearance: none;
+    height: 30px;
+    width: 170px;
+    display: table;
+    font-weight: bold;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.55);
+    border-radius: 2em;
+    cursor: pointer;
+}
