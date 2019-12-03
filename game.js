@@ -51,13 +51,15 @@ function draw() {
     fill(255);
     textSize(16);
     text(label[0].label, 10, height - 10);
-    if (label[0].label == posiciones[i - 1].key) {
-        src.innerHTML = "";
-        var img = document.createElement("img");
-        img.src = posiciones[i - 1].value;
-        src.appendChild(img);
-        posiciones.pop();
-        i--;
+    if(posiciones.length > 0) {
+        if (label[0].label == posiciones[i - 1].key) {
+            src.innerHTML = "";
+            var img = document.createElement("img");
+            img.src = posiciones[i - 1].value;
+            src.appendChild(img);
+            posiciones.pop();
+            i--;
+        }
     }
 }
 
