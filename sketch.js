@@ -6,23 +6,19 @@ let tigreButton, pajaroButton, perroButton, conejoButton;
 let label = 'loading model';
 let trainButton;
 var labeleado;
-var contador= 0;
+var contador = 0;
 var src = document.getElementById("header");
 
 function modelReady() {
   console.log('Model is ready!!!');
-  classifier.load('model.json',custoModelReady);
 }
 
-function custoModelReady(){
+function custoModelReady() {
   console.log('custommodel ready');
-  
 }
-
 
 function videoReady() {
   console.log('Video is ready!!!');
-  classifier.classify(gotResults);
 }
 
 function setup() {
@@ -32,11 +28,11 @@ function setup() {
   background(0);
   mobilenet = ml5.featureExtractor('MobileNet', modelReady);
   classifier = mobilenet.classification(video, videoReady);
-  classifier.load('model.json');
+  // classifier.load('model.json');
   rataButton = createButton('rata');
   rataButton.mousePressed(function () {
     classifier.addImage('rata');
-    contador+=1;
+    contador += 1;
     console.log(contador)
   });
   serpienteButton = createButton('serpiente');
@@ -89,29 +85,10 @@ function setup() {
   perroButton.mousePressed(function () {
     classifier.addImage('perro');
   });
-
-
-  trex = createButton('nnn');
-  
-  
-  trex = createButton('nnn');
-
-  trex = createButton('nnn');
-
-  trex = createButton('nnn');
-  trex = createButton('nnn');
-
-  trex = createButton('nnn');
-
-  trex = createButton('nnn');
-
-
-
   trainButton = createButton('train');
   trainButton.mousePressed(function () {
     classifier.train(whileTraining);
   });
-
   saveButton = createButton('save');
   saveButton.mousePressed(function () {
     classifier.save();
@@ -125,92 +102,92 @@ function draw() {
   textSize(16);
   text(label[0].label, 10, height - 10);
   labeleado = label[0].label;
-  
-  if(labeleado == "rata"){
+
+  if (labeleado == "rata") {
     src.innerHTML = "";
     var img = document.createElement("img");
     img.src = "images/rata.JPG";
     src.appendChild(img);
-  } else if (labeleado == "buey"){
+  } 
+  else if (labeleado == "buey") {
     src.innerHTML = "";
     var img = document.createElement("img");
     img.src = "images/buey.JPG";
     src.appendChild(img);
   }
-  else if (labeleado == "caballo"){
+  else if (labeleado == "caballo") {
     src.innerHTML = "";
     var img = document.createElement("img");
     img.src = "images/caballo.JPG";
     src.appendChild(img);
   }
-  else if (labeleado == "dragon"){
+  else if (labeleado == "dragon") {
     src.innerHTML = "";
     var img = document.createElement("img");
     img.src = "images/dragon.JPG";
     src.appendChild(img);
   }
-  else if (labeleado == "jabali"){
+  else if (labeleado == "jabali") {
     src.innerHTML = "";
     var img = document.createElement("img");
     img.src = "images/jabali.JPG";
     src.appendChild(img);
   }
-  else if (labeleado == "liebre"){
+  else if (labeleado == "liebre") {
     src.innerHTML = "";
     var img = document.createElement("img");
     img.src = "images/liebre.JPG";
     src.appendChild(img);
   }
-  else if (labeleado == "mono"){
+  else if (labeleado == "mono") {
     src.innerHTML = "";
     var img = document.createElement("img");
     img.src = "images/mono.JPG";
     src.appendChild(img);
   }
-  else if (labeleado == "oveja"){
+  else if (labeleado == "oveja") {
     src.innerHTML = "";
     var img = document.createElement("img");
     img.src = "images/oveja.JPG";
     src.appendChild(img);
   }
-  else if (labeleado == "pajaro"){
+  else if (labeleado == "pajaro") {
     src.innerHTML = "";
     var img = document.createElement("img");
     img.src = "images/pajaro.JPG";
     src.appendChild(img);
   }
-  else if (labeleado == "perro"){
+  else if (labeleado == "perro") {
     src.innerHTML = "";
     var img = document.createElement("img");
     img.src = "images/perro.JPG";
     src.appendChild(img);
   }
-  else if (labeleado == "serpiente"){
+  else if (labeleado == "serpiente") {
     src.innerHTML = "";
     var img = document.createElement("img");
     img.src = "images/serpiente.JPG";
     src.appendChild(img);
   }
-  else if (labeleado == "tigre"){
+  else if (labeleado == "tigre") {
     src.innerHTML = "";
     var img = document.createElement("img");
     img.src = "images/tigre.JPG";
     src.appendChild(img);
   }
-
- 
-  }
-
+}
 
 function whileTraining(loss) {
   if (loss == null) {
     console.log('Training Complete');
     classifier.classify(gotResults);
+    jugarButton = createButton('Jugar');
+    jugarButton.mousePressed(function () {
+    });
   } else {
     console.log(loss);
   }
 }
-
 
 function gotResults(error, result) {
   if (error) {
@@ -220,15 +197,3 @@ function gotResults(error, result) {
     classifier.classify(gotResults);
   }
 }
-
-
-
-
-/*
-
-
-NOT MY CODE 
-
-
-*/
-
