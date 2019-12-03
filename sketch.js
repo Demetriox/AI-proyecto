@@ -6,15 +6,23 @@ let tigreButton, pajaroButton, perroButton, conejoButton;
 let label = 'loading model';
 let trainButton;
 var labeleado;
+var contador= 0;
 var src = document.getElementById("header");
 
 function modelReady() {
   console.log('Model is ready!!!');
+  classifier.load('model.json',custoModelReady);
+}
+
+function custoModelReady(){
+  console.log('custommodel ready');
+  
 }
 
 
 function videoReady() {
   console.log('Video is ready!!!');
+  classifier.classify(gotResults);
 }
 
 function setup() {
@@ -24,9 +32,12 @@ function setup() {
   background(0);
   mobilenet = ml5.featureExtractor('MobileNet', modelReady);
   classifier = mobilenet.classification(video, videoReady);
+  classifier.load('model.json');
   rataButton = createButton('rata');
   rataButton.mousePressed(function () {
     classifier.addImage('rata');
+    contador+=1;
+    console.log(contador)
   });
   serpienteButton = createButton('serpiente');
   serpienteButton.mousePressed(function () {
@@ -209,3 +220,15 @@ function gotResults(error, result) {
     classifier.classify(gotResults);
   }
 }
+
+
+
+
+/*
+
+
+NOT MY CODE 
+
+
+*/
+

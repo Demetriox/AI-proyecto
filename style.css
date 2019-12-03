@@ -10,9 +10,9 @@ body {
 }
 
 #poses {
-    float: left;
+    float: right;
 }
 
 #header {
-    float: left;
+    float: right;
 }
