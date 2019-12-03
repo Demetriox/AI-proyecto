@@ -109,6 +109,10 @@ function start() {
 }
 
 function reset() {
-    src.innerHTML = " ";
+    src.innerHTML = "";
+    posiciones.sort(function () { return 0.5 - Math.random() });
+    var img = document.createElement("img");
+    img.src = posiciones[i - 1].value;
+    src.appendChild(img);
     reloj = 40;
 }
