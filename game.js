@@ -61,6 +61,12 @@ function draw() {
             i--;
         }
     }
+    else if (reloj == 0) {
+        console.log("Perdiste!")
+    }
+    else {
+        console.log("Ganaste!")
+    }
 }
 
 function gotResults(error, result) {
