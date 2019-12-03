@@ -3,7 +3,7 @@ let mobilenet;
 let classifier;
 let video;
 let label = 'loading model';
-var reloj = 5;
+var reloj = 40;
 var gameStart = false;
 var posiciones = [
     { key: "pajaro", value: "../images/pajaro.JPG" },
@@ -50,19 +50,26 @@ function draw() {
 
 function updateClock() {
     reloj = document.getElementById('countdown').innerHTML = reloj;
-    if (reloj == 0) {
+    if (reloj+1 == 0) {
         console.log('Se acabo el tiempo');
-    } else {
-        reloj -= 1;
+    }
+    else {
         setTimeout("updateClock()", 1000);
+        reloj -= 1;
     }
 }
 
 function jugar() {
-    if (reloj == 0) {
+    if (reloj+1 == 0) {
         var img = document.createElement("img");
         img.src = "../images/perdiste.jpg";
-        src.innerHTML = "Perdiste";
+        let gameStatus = document.getElementById('gameCardTitle');
+        let instrucciones = document.getElementById('instrucciones');
+        let counterLeft = document.getElementById('counterLeft');
+        gameStatus.innerHTML = "Perdiste";
+        instrucciones.innerHTML = "";
+        counterLeft.innerHTML = "";
+        src.innerHTML = "";
         src.appendChild(img);
         gameStart = false;
     }
@@ -97,8 +104,8 @@ function gotResults(error, result) {
 
 function start() {
     updateClock();
-    classifier.classify(gotResults);
     gameStart = true;
+    classifier.classify(gotResults);
 }
 
 function reset() {
