@@ -6,6 +6,7 @@ let label = 'loading model';
 let trainButton;
 var labeleado;
 var contador = 0;
+var run = true
 
 var posiciones = [
     // { key: "pajaro", value: "images/pajaro.JPG" },
@@ -33,7 +34,10 @@ function setup() {
     mobilenet = ml5.featureExtractor('MobileNet', console.log("ML5 Loaded"));
     classifier = mobilenet.classification(video);
     classifier.load('model.json', console.log("Model is ready."));
-    classifier.classify(gotResults);
+    let startGame = createButton('game');
+    startGame.mousePressed(function () {
+        classifier.classify(gotResults);
+      });
     posiciones.sort(function(){return 0.5 - Math.random()});
     var img = document.createElement("img");
     img.src = posiciones[i - 1].value;
@@ -47,16 +51,14 @@ function draw() {
     fill(255);
     textSize(16);
     text(label[0].label, 10, height - 10);
-    classifier.classify(gotResults);
-
-    // if (label[0].label == posiciones[i - 1].key) {
-    //     src.innerHTML = "";
-    //     var img = document.createElement("img");
-    //     img.src = posiciones[i - 1].value;
-    //     src.appendChild(img);
-    //     posiciones.pop();
-    //     i--;
-    // }
+    if (label[0].label == posiciones[i - 1].key) {
+        src.innerHTML = "";
+        var img = document.createElement("img");
+        img.src = posiciones[i - 1].value;
+        src.appendChild(img);
+        posiciones.pop();
+        i--;
+    }
 }
 
 function gotResults(error, result) {
