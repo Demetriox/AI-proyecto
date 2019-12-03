@@ -5,6 +5,13 @@ let video;
 let label = 'loading model';
 var reloj = 40;
 var gameStart = false;
+let modelURL = 'https://storage.googleapis.com/tm-models/YadBJmj5/';
+
+function preload() {
+  classifier = ml5.imageClassifier('model.json');
+}
+
+
 var posiciones = [
     { key: "pajaro", value: "../images/pajaro.JPG" },
     { key: "jabali", value: "../images/jabali.JPG" },
@@ -28,9 +35,10 @@ function setup() {
     video = createCapture(VIDEO);
     video.hide();
     background(0);
-    mobilenet = ml5.featureExtractor('MobileNet', console.log("ML5 Loaded"));
-    classifier = mobilenet.classification(video);
-    classifier.load('../model.json', console.log("Model is ready."));
+    /* mobilenet = ml5.featureExtractor('MobileNet', console.log("ML5 Loaded"));
+    classifier = mobilenet.classification(video); */ 
+    classifyVideo();
+    // classifier.load('../model.json', console.log("Model is ready."));
     posiciones.sort(function () { return 0.5 - Math.random() });
     var img = document.createElement("img");
     img.src = posiciones[i - 1].value;
@@ -92,7 +100,7 @@ function jugar() {
         gameStart = false;
     }
 }
-
+/*
 function gotResults(error, result) {
     if (error) {
         console.error(error);
@@ -101,6 +109,7 @@ function gotResults(error, result) {
         classifier.classify(gotResults);
     }
 }
+*/
 
 function start() {
     updateClock();
@@ -115,4 +124,25 @@ function reset() {
     img.src = posiciones[i - 1].value;
     src.appendChild(img);
     reloj = 40;
+}
+
+
+
+// P5 EXAMPLE OF PRELOADED MODEL
+function classifyVideo() {
+    classifier.classify(video, gotResults);
+  }
+
+
+// STEP 3: Get the classification!
+function gotResults(error, results) {
+  // Something went wrong!
+  if (error) {
+    console.error(error);
+    return;
+  }
+  // Store the label and classify again!
+  console.log(label);
+  label = results[0].label;
+  classifyVideo();
 }
